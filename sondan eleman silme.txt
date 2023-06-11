@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void push(struct node **head,int veri){
+    struct node *dugum =(struct node*)malloc(sizeof(struct node));
+    dugum->data=veri;
+    dugum->next=(*head);
+    (*head) = dugum;
+}
+void printList(struct node *head){
+    struct node *gecici = head;
+    while(gecici!=NULL){
+    printf("%d\t ",gecici->data);
+    gecici=gecici->next;
+}
+}
+void sil(struct node (**head)){
+    
+struct node *gecici=(*head);
+    int elemanSayisi=0;
+
+   while(gecici!=NULL){
+        gecici=gecici->next;
+        elemanSayisi++;
+}
+if(elemanSayisi%2==1){
+struct node* temp= (*head);
+(*head)=temp->next;
+free(temp);
+}
+
+if(elemanSayisi%2==0){
+struct node* temp= (*head);
+struct node* del = NULL;
+
+while ( temp->next->next !=NULL ){
+temp=temp->next;
+}
+del = temp->next;
+temp->next =NULL;
+free(del);
+}
+}
+int main()
+{
+    struct node* list =NULL;
+   push(&list,191);
+   push(&list,101);
+   push(&list,202);
+   push(&list,1);
+   
+    sil(&list);
+    
+    printList(list);
+    return 0;
+}
